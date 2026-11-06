@@ -131,7 +131,7 @@
     "typescript-vue": "npm:typescript@5.9.3",
     "vite": "^8.3.0",
     "vue-tsc": "3.3.12",
-    "ws": "^8.21.3",
+    "ws": "^8.22.1",
     "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^22.20.3",
     "typescript": "^7.0.2",
