@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security policy
+    url: https://github.com/wiseqingyang/prompt-lens/blob/master/SECURITY.md
+    about: Do not report vulnerabilities or credentials in public issues.

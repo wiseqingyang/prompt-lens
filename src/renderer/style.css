@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* 冰川青碧全局主题色阶（#1f7a73 / 浅底 #f0fdfa） */
+  --color-indigo-50: #f0fdfa;
+  --color-indigo-100: #dcf7f3;
+  --color-indigo-200: #bcece5;
+  --color-indigo-300: #8cdbd1;
+  --color-indigo-400: #56bfb3;
+  --color-indigo-500: #2f968d;
+  --color-indigo-600: #1f7a73;
+  --color-indigo-700: #1a635e;
+  --color-indigo-800: #174f4c;
+  --color-indigo-900: #15413f;
+  --color-indigo-950: #0b2726;
+
+  /* 柔和淡雅紫罗兰衍生色阶 */
+  --color-violet-50: #f5f4fb;
+  --color-violet-100: #ebe8f7;
+  --color-violet-200: #d8d2ef;
+  --color-violet-300: #bcb2e3;
+  --color-violet-400: #9b8cd4;
+  --color-violet-500: #7e6ec1;
+  --color-violet-600: #6857ad;
+  --color-violet-700: #564792;
+  --color-violet-800: #473b78;
+  --color-violet-900: #3b3263;
+  --color-violet-950: #231d3d;
+}
+
+/* Theme CSS Variables */
+:root {
+  --color-scrollbar-thumb: #cbd5e1;
+  --color-scrollbar-thumb-hover: #94a3b8;
+}
+
+html.dark {
+  --color-scrollbar-thumb: #334155;
+  --color-scrollbar-thumb-hover: #475569;
+}
+
+/* Custom Scrollbars (Adaptive for Light and Dark) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-thumb-hover);
+}
+
+/* Window Drag Regions */
+.app-drag-region {
+  -webkit-app-region: drag;
+}
+
+.app-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Code & Pre styling */
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Thin horizontal scrollbar for turn stepper */
+.stepper-scrollbar::-webkit-scrollbar {
+  height: 4px;
+}
+.stepper-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.stepper-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 9999px;
+}
+.stepper-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-indigo-500) 50%, transparent);
+}
+.stepper-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+}

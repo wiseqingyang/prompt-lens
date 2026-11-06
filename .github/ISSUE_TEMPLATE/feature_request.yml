@@ -1,0 +1,15 @@
+name: Feature request
+description: Describe a problem and observable acceptance criteria.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and intended users
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired behavior and acceptance criteria
+    validations:
+      required: true

@@ -1,0 +1,59 @@
+name: Signed desktop candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  quality:
+    uses: ./.github/workflows/verify.yml
+  secret_scan:
+    uses: ./.github/workflows/secrets.yml
+  candidate:
+    needs: [quality, secret_scan]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: macos-latest
+    environment: release
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: '1.27.3'
+          cache-dependency-path: core-go/go.sum
+      - run: npm ci
+      - name: Build signed, notarized macOS arm64 candidate
+        run: npm run dist:mac
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      - name: Validate Apple signing and notarization
+        run: |
+          APP='.quality/signed-release/mac-arm64/PromptLens.app'
+          codesign --verify --deep --strict --verbose=2 "$APP"
+          spctl --assess --type execute --verbose=2 "$APP"
+          xcrun stapler validate "$APP"
+          cd .quality/signed-release
+          shasum -a 256 *.dmg *.zip > SHA256SUMS
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: macos-arm64-release-candidate
+          path: |
+            .quality/signed-release/*.dmg
+            .quality/signed-release/*.zip
+            .quality/signed-release/SHA256SUMS
+            .quality/signed-release/metadata/
+            .quality/signed-release/BUILD_STATUS.txt
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,153 @@
+{
+  "name": "prompt-lens",
+  "version": "2.0.0",
+  "description": "真正无侵入式的 Coding Agent Prompt 组装解剖与逆向研究平台 (Electron Desktop)",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "test": "npm run test:core && npm run test:main",
+    "test:core": "cd core-go && go test -race ./...",
+    "test:main": "npm run build:main && node scripts/test-main.cjs",
+    "build:core": "node scripts/build-core.cjs",
+    "build:core:win": "node scripts/build-core.cjs --windows",
+    "build:main": "node node_modules/typescript/bin/tsc",
+    "build:renderer": "vite build",
+    "build": "npm run build:core && npm run build:main && npm run build:renderer",
+    "dev:renderer": "vite",
+    "start": "npm run build && electron .",
+    "pack": "node scripts/package-desktop.cjs --preview",
+    "dist:mac": "node scripts/package-desktop.cjs",
+    "dist": "npm run dist:mac",
+    "typecheck:main": "node node_modules/typescript/bin/tsc --noEmit",
+    "typecheck:renderer": "node scripts/typecheck-renderer.cjs --noEmit -p tsconfig.renderer.json",
+    "typecheck": "npm run typecheck:main && npm run typecheck:renderer",
+    "check:go": "cd core-go && go vet ./...",
+    "verify:fast": "node scripts/verify.cjs --fast",
+    "verify": "node scripts/verify.cjs",
+    "release:metadata": "node scripts/release-metadata.cjs",
+    "source:snapshot": "node scripts/source-snapshot.cjs",
+    "audit:dependencies": "node scripts/audit-dependencies.cjs",
+    "postinstall": "node node_modules/electron/install.js",
+    "smoke:desktop": "electron scripts/desktop-smoke.cjs",
+    "check:source": "node scripts/source-files.cjs",
+    "pack:source": "node scripts/package-source.cjs"
+  },
+  "keywords": [
+    "prompt",
+    "prompt-anatomy",
+    "agent",
+    "llm",
+    "mitm",
+    "audit",
+    "token",
+    "antigravity",
+    "claude",
+    "codex",
+    "cursor",
+    "pi",
+    "workbuddy"
+  ],
+  "author": "PromptLens Contributors",
+  "license": "MIT",
+  "type": "commonjs",
+  "build": {
+    "appId": "com.promptlens.app",
+    "productName": "PromptLens",
+    "directories": {
+      "output": "release"
+    },
+    "extraResources": [
+      {
+        "from": "resources/bin",
+        "to": "bin",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "resources/promptlens-mark.png",
+        "to": "promptlens-mark.png"
+      },
+      {
+        "from": ".quality/distribution",
+        "to": "licenses",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "resources/promptlens-mark.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "notarize": true,
+      "binaries": [
+        "Contents/Resources/bin/prompt-lens-core"
+      ]
+    },
+    "win": {
+      "icon": "resources/promptlens-mark.png",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "forceCodeSigning": true
+  },
+  "dependencies": {
+    "@fastify/static": "^10.1.4",
+    "better-sqlite3": "^13.0.3",
+    "fastify": "^5.12.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.1",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "electron": "^44.4.1",
+    "electron-builder": "^26.15.3",
+    "tailwindcss": "^4.1.1",
+    "typescript-vue": "npm:typescript@5.9.3",
+    "vite": "^8.3.0",
+    "vue-tsc": "3.3.12",
+    "ws": "^8.21.3",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.20.3",
+    "typescript": "^7.0.2",
+    "vue": "^3.5.43",
+    "@fortawesome/fontawesome-free": "^6.7.2"
+  },
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wiseqingyang/prompt-lens.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wiseqingyang/prompt-lens/issues"
+  },
+  "homepage": "https://github.com/wiseqingyang/prompt-lens#readme",
+  "private": true
+}

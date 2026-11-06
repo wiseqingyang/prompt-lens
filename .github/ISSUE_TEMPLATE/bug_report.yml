@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a reproducible defect using synthetic data.
+body:
+  - type: markdown
+    attributes:
+      value: Do not upload captured prompts, credentials, private source, databases or CA keys. For vulnerabilities, follow SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Version and platform
+      placeholder: commit or release, OS version, CPU architecture, Node/Go if built from source
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce with synthetic data
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Manually reviewed, redacted diagnostics (optional)

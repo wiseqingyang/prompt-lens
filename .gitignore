@@ -1,0 +1,36 @@
+.venv/
+__pycache__/
+*.pyc
+*.log
+llm_lens.db
+*.db-wal
+*.db-shm
+*.db.migrated
+.DS_Store
+node_modules
+node_modules/
+dist/
+release/
+resources/bin/*
+!resources/bin/.gitkeep
+.http-mitm-proxy/
+.quality/
+
+# Private captures, credentials and local environments never belong in source.
+tmp/
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+coverage/
+
+# 开发过程性文档（需求、验收与修改记录；保留模板供二次开发参考）
+docs/requirements/*
+!docs/requirements/TEMPLATE.md
