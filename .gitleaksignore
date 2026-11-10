@@ -1,0 +1,4 @@
+# False positive: the public HTTPS URL with an explicit :443 port in
+# TestBackgroundAuditScope is not a credential. Ignore only this historical
+# finding; new commits, lines, files and all other rules remain scanned.
+85ec522d0ee6aaa9b436d547cf1e0080aae18e7c:core-go/audit_scope_test.go:generic-api-key:18
