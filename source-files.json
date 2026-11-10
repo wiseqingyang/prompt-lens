@@ -10,6 +10,7 @@
     ".github/workflows/secrets.yml",
     ".github/workflows/verify.yml",
     ".gitignore",
+    ".gitleaksignore",
     ".node-version",
     ".npmrc",
     "AGENTS.md",
