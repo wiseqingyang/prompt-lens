@@ -135,7 +135,7 @@
     "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^22.20.3",
     "typescript": "^7.0.2",
-    "vue": "^3.5.43",
+    "vue": "^3.5.45",
     "@fortawesome/fontawesome-free": "^6.7.2"
   },
   "engines": {
