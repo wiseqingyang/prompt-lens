@@ -125,7 +125,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.4",
     "@vitejs/plugin-vue": "^6.0.9",
-    "electron": "^44.4.1",
+    "electron": "^45.2.3",
     "electron-builder": "^26.15.3",
     "tailwindcss": "^4.1.1",
     "typescript-vue": "npm:typescript@5.9.3",
